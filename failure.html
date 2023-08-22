@@ -9,13 +9,20 @@
     <title>Failure</title>
   </head>
   <body>
-    <div class="jumbotron jumbotron-fluid bg-dark-subtle" style="height: 100vh">
+    <div
+      class="jumbotron jumbotron-fluid bg-dark-subtle p-5"
+      style="height: 100vh">
       <div class="container">
-        <h1 class="display-4">Uh oh!</h1>
+        <h1 class="display-4 fw-semibold">Uh oh!</h1>
         <p class="lead">
           There was an error signing you up. Please try again or contact the
           developer!
         </p>
+        <form action="/failure" method="post">
+          <button class="btn btn-lg btn-warning" type="submit">
+            Try Again
+          </button>
+        </form>
       </div>
     </div>
   </body>

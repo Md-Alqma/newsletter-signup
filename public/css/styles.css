@@ -6,7 +6,6 @@ body {
 .form-signup {
   max-width: 330px;
   padding: 1rem;
-  text-align: center;
 }
 
 .form-signup .form-floating:focus-within {

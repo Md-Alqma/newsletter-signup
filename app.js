@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+const dotenv = require("dotenv").config();
 
 const app = express();
 
@@ -35,21 +36,25 @@ app.post("/", (req, res) => {
 
   const jsonData = JSON.stringify(data);
 
-  const url = `https://us21.api.mailchimp.com/3.0/lists/9b59f0b528`;
+  const listId = process.env.MAILCHIMP_LIST_ID;
+
+  const url = `https://us21.api.mailchimp.com/3.0/lists/${listId}`;
+
+  const apiKey = process.env.MAILCHIMP_API_KEY;
 
   const options = {
     method: "POST",
-    auth: "alqma:dc08f72588e505f54d1281c8fb9a8658-us21",
+    auth: apiKey,
   };
 
   const request = https.request(url, options, (response) => {
     response.on("data", (data) => {
       const parsedData = JSON.parse(data);
 
-      if (response.statusCode === 200) {
-        res.sendFile(__dirname + "/success.html");
-      } else {
+      if (parsedData.error_count > 0) {
         res.sendFile(__dirname + "/failure.html");
+      } else {
+        res.sendFile(__dirname + "/success.html");
       }
     });
   });
